@@ -41,7 +41,6 @@ return {
                 filetypes = {
                     "lua",
                     "css",
-                    "javascript",
                     html = { mode = "foreground" },
                 },
                 user_default_options = { mode = "background" },
