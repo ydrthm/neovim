@@ -1,0 +1,77 @@
+return {
+    {
+        "j-hui/fidget.nvim",
+        opts = {},
+    },
+    {
+        "windwp/nvim-ts-autotag", --html tag
+        config = function()
+            require("nvim-ts-autotag").setup()
+        end,
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "^3.0.0",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end,
+    },
+    {
+        "mbbill/undotree",
+        lazy = true,      -- load only when called
+        cmd = "UndotreeToggle", -- lazy-load when this command is used
+        config = function()
+            vim.g.undotree_SetFocusWhenToggle = 1
+            vim.g.undotree_HighlightChangedText = 1
+            -- vim.g.undotree_TreeNodeShape = "●"
+        end,
+    },
+    {
+        "catgoose/nvim-colorizer.lua",
+        event = "BufReadPre",
+        config = function()
+            require("colorizer").setup({
+                filetypes = {
+                    "lua",
+                    "css",
+                    html = { mode = "foreground" },
+                },
+                user_defaultoions = { mode = "background" },
+            })
+        end,
+    },
+    {
+        "stevearc/dressing.nvim",
+        opts = {},
+    },
+    {
+        "stevearc/conform.nvim",
+        events = { "BufReadPre", "BufNewFile" },
+        opts = {},
+        config = function()
+            require("conform").setup({
+                formatters_by_ft = {
+                    lua = { "stylua", lsp_format = "fallback" },
+                },
+            })
+        end,
+
+        vim.keymap.set("n", "Fl", function()
+            require("conform").format()
+        end, { desc = "Format Language/Code" }),
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("lualine").setup({
+                options = {
+                    theme = "solarized_dark",
+                },
+            })
+        end,
+    },
+}

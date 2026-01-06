@@ -1,13 +1,32 @@
-vim.g.python3_host_prog = '/usr/bin/python3'
+require("core")
 
-require("configs.options")
-require("configs.keymaps")
-require("edlazy")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out,                            "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
+end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd[[hi @function.builtin guifg=#f23e76]]
--- vim.cmd[[hi @variable.builtin guifg=#fa80a6]]
+require("lazy").setup({
+    spec = {
+        { import = "navigation" },
+        { import = "colorscheme" },
+        { import = "misc" },
+        { import = "treesitter" },
+        { import = "lsp" },
+        { import = "git" },
+    },
+    checker = { enabled = true },
+})
 
---#eb6f92
---#f6708
-
--- vim.cmd(":hi statusline guibg=NONE")
+-- vim.cmd("hi @keyword guifg=green")
+--
