@@ -82,8 +82,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end,
 })
 
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "UndotreeToggle" })
-
 -- vim.api.nvim_create_autocmd("ColorScheme", {
 --   callback = function()
 --     vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
