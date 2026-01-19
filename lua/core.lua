@@ -51,10 +51,10 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yankin
 
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
-    group = augroup,
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+  group = augroup,
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- Better indenting in visual mode
@@ -72,14 +72,14 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position"
 
 -- Return to last edit position when opening files
 vim.api.nvim_create_autocmd("BufReadPost", {
-    group = augroup,
-    callback = function()
-        local mark = vim.api.nvim_buf_get_mark(0, '"')
-        local lcount = vim.api.nvim_buf_line_count(0)
-        if mark[1] > 0 and mark[1] <= lcount then
-            pcall(vim.api.nvim_win_set_cursor, 0, mark)
-        end
-    end,
+  group = augroup,
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
 })
 
 -- vim.api.nvim_create_autocmd("ColorScheme", {
@@ -89,4 +89,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 --   end,
 -- })
 --
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>ql", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>qa", vim.diagnostic.setqflist, { desc = "Open diagnostic [Q]uickfix list" })
+
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
