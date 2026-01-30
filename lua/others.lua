@@ -3,12 +3,12 @@ return {
 		"j-hui/fidget.nvim",
 		opts = {},
 	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-		opts = {},
-	},
+	-- {
+	-- 	"windwp/nvim-autopairs",
+	-- 	event = "InsertEnter",
+	-- 	config = true,
+	-- 	opts = {},
+	-- },
 	-- {
 	--   "windwp/nvim-ts-autotag", --html tag
 	--   config = function()
@@ -54,17 +54,19 @@ return {
 		"stevearc/dressing.nvim",
 		opts = {},
 	},
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("lualine").setup({
-				options = {
-					theme = "solarized_dark",
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	config = function()
+	-- 		require("lualine").setup({
+	-- 			options = {
+	-- 				theme = "solarized_dark",
+	--                    section_separators  = '',
+	--                    component_separators = '',
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"stevearc/conform.nvim",
 		events = { "BufReadPre", "BufNewFile" },
@@ -78,7 +80,7 @@ return {
 			})
 		end,
 
-		vim.keymap.set("n", "Fl", function()
+		vim.keymap.set("n", "<leader>fl", function()
 			require("conform").format({ lsp_fallback = false })
 		end, { desc = "Format Language/Code" }),
 	}

@@ -23,7 +23,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 vim.opt.showmode = true
-vim.opt.colorcolumn = "90"
+vim.opt.colorcolumn = "80"
 
 vim.opt.backspace = { "start", "eol", "indent" }
 
@@ -82,14 +82,5 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("ColorScheme", {
---   callback = function()
---     vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
---     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
---   end,
--- })
---
 vim.keymap.set("n", "<leader>ql", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<leader>qa", vim.diagnostic.setqflist, { desc = "Open diagnostic [Q]uickfix list" })
-
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })

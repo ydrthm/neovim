@@ -3,7 +3,14 @@ return {
 	lazy = false,
 	priority = 1000,
 	---@type solarized.config
-	opts = {},
+	opts = {
+	       transparent = {
+	           enabled = true,
+	       },
+	       styles = {
+               enabled = false,
+	       },
+	   },
 	config = function(_, opts)
 		vim.o.background = "dark"
 		require("solarized").setup(opts)
