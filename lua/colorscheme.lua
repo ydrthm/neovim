@@ -6,6 +6,10 @@ return {
 	opts = {
 	       transparent = {
 	           enabled = true,
+               normalfloat = false,
+               pmenu = false,
+               lazy = false,
+               mason = false,
 	       },
 	       styles = {
                enabled = false,

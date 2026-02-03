@@ -18,6 +18,7 @@ vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
+-- vim.opt.hlsearch = false
 
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
@@ -62,13 +63,16 @@ vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Move lines up/down
--- vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
--- vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Return to last edit position when opening files
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -82,5 +86,5 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
-vim.keymap.set("n", "<leader>ql", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>ql", vim.diagnostic.setloclist, { desc = "Open diagnostic [L]ocal list" })
 vim.keymap.set("n", "<leader>qa", vim.diagnostic.setqflist, { desc = "Open diagnostic [Q]uickfix list" })

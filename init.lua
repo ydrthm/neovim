@@ -26,6 +26,7 @@ require("lazy").setup({
     { import = "git" },
     { import = "debugger" },
     { import = "treesitter" },
+    { import = "vimbegood" },
   },
   checker = { enabled = true },
 })
