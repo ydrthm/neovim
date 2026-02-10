@@ -18,6 +18,28 @@ return {
 				vim.fn.expand("$HOME") .. "/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
 			)
 
+            dap.adapters.codelldb = {
+                type = 'server',
+                port = "${port}",
+                executable = {
+                    -- Change this path if your mason package is in a different location
+                    command = vim.fn.expand("$HOME") .. "/.local/share/nvim/mason/bin/codelldb",
+                    args = {"--port", "${port}"},
+                }
+            }
+            dap.configurations.c = {
+                {
+                    name = "Launch file",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                    end,
+                    cwd = '${workspaceFolder}',
+                    stopOnEntry = false,
+                },
+            }
+
 			-- Auto open/close UI - other config
 			-- dap.listeners.before.attach.dapui_config = function()
 			--   ui.open()

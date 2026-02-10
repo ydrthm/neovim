@@ -1,32 +1,27 @@
-return { 
+return {
     {
         "nvim-treesitter/nvim-treesitter",
-        lazy = false,
         build = ":TSUpdate",
+        -- 'lazy = false' is fine here to ensure highlighting starts immediately
+        lazy = false, 
         config = function()
-            local ts = require("nvim-treesitter")
+            -- Use pcall to safely check if the module exists
+            local status_ok, configs = pcall(require, "nvim-treesitter.configs")
+            if not status_ok then
+                return
+            end
 
-            ts.install({ "lua", "python", "vim", "vimdoc", "markdown", "csv" })
-
-            vim.api.nvim_create_autocmd("FileType", {
-                callback = function(args)
-                    -- 1. Check if the current filetype actually has a Treesitter parser
-                    local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
-                    if not lang then
-                        return
-                    end -- If no language mapping, stop here
-
-                    local has_parser, _ = pcall(vim.treesitter.get_parser, args.buf, lang)
-                    if not has_parser then
-                        return
-                    end -- If parser isn't installed, stop here
-
-                    -- 2. Only start if the parser exists
-                    vim.treesitter.start(args.buf)
-                end,
+            configs.setup({
+                ensure_installed = { "html", "c", "lua", "python", "vim", "vimdoc", "markdown", "csv" },
+                highlight = {
+                    enable = true,
+                },
+                indent = {
+                    enable = true,
+                },
             })
-        end
-    }, 
+        end,
+    },
     {
         "nvim-treesitter/nvim-treesitter-context",
 		after = "nvim-treesitter",

@@ -32,4 +32,4 @@ require("lazy").setup({
 })
 
 -- vim.cmd("hi @keyword guifg=green")
---
+vim.api.nvim_set_hl(0, "netrwMarkFile", { fg = "#e0def4", bg = "#fc6f03"})

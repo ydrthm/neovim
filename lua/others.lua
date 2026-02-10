@@ -67,21 +67,31 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
-	{
-		"stevearc/conform.nvim",
-		events = { "BufReadPre", "BufNewFile" },
-		opts = {},
-		config = function()
-			require("conform").setup({
-				formatters_by_ft = {
-					lua = { "stylua" },
-					python = { "ruff_organize_imports", "ruff_format" },
-				},
-			})
-		end,
+    {
+        "stevearc/conform.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local conform = require("conform")
+            conform.setup({
+                formatters_by_ft = {
+                    python = { "ruff_organize_imports", "ruff_format" },
+                    c = { "clang-format" },
+                    html = { "superhtml" },
+                },
+                formatters = {
+                    ["clang-format"] = {
+                        prepend_args = { "--style={IndentWidth: 4, BasedOnStyle: LLVM}" },
+                    },
+                },
+            })
 
-		vim.keymap.set("n", "<leader>fl", function()
-			require("conform").format({ lsp_fallback = false })
-		end, { desc = "Format Language/Code" }),
-	}
+            -- FIX: The keymap MUST be inside the config function or outside the table
+            vim.keymap.set("n", "<leader>fl", function()
+                conform.format({
+                    timeout_ms = 500,
+                    lsp_fallback = true, -- This allows clangd to handle C files
+                })
+            end, { desc = "Format Language/Code" })
+        end,
+    }
 }

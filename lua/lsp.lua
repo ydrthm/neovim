@@ -76,6 +76,15 @@ return {
                     },
                 },
 				ruff = {},
+                clangd = {
+                    cmd = {
+                        "clangd",
+                        "--background-index", -- Index your project in the background
+                        "--clang-tidy",      -- Enable the advanced linter
+                        "--header-insertion=never", -- Stops it from automatically adding #include (can be annoying)
+                    },
+                },
+                superhtml = {},
 			}
 
             require("mason-tool-installer").setup({
@@ -84,6 +93,10 @@ return {
                     "basedpyright",
                     "ruff",
                     "debugpy",
+                    "clangd",
+                    "codelldb",
+                    "clang-format",
+                    "superhtml",
                 },
                 auto_update = false,
                 run_on_start = true,
