@@ -85,6 +85,32 @@ return {
                     },
                 },
                 superhtml = {},
+                vtsls = {
+                    on_attach = function(client)
+                        client.server_capabilities.documentFormattingProvider = false
+                        client.server_capabilities.documentRangeFormattingProvider = false
+                    end,
+                    settings = {
+                        -- 1. JAVASCRIPT SPECIFIC (What you need right now)
+                        javascript = {
+                            updateImportsOnFileMove = { enabled = "always" },
+                        },
+                        -- 2. TYPESCRIPT SPECIFIC (For when you switch later)
+                        typescript = {
+                            updateImportsOnFileMove = { enabled = "always" },
+                        },
+                        -- 3. SERVER BEHAVIOR (Core performance)
+                        vtsls = {
+                            autoUseWorkspaceTsdk = true,
+                            experimental = {
+                                completion = {
+                                    enableServerSideFuzzyMatch = true,
+                                },
+                            },
+                        },
+                    },
+                },
+                biome = {},
 			}
 
             require("mason-tool-installer").setup({
@@ -97,6 +123,9 @@ return {
                     "codelldb",
                     "clang-format",
                     "superhtml",
+                    "vtsls",
+                    "biome",
+                    "js-debug-adapter",
                 },
                 auto_update = false,
                 run_on_start = true,

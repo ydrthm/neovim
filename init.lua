@@ -31,5 +31,6 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
--- vim.cmd("hi @keyword guifg=green")
+-- vim.cmd("hi @keyword.return guifg=green")
+-- vim.api.nvim_set_hl(0, "Statement", { bold = false })
 vim.api.nvim_set_hl(0, "netrwMarkFile", { fg = "#e0def4", bg = "#fc6f03"})

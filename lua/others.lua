@@ -44,7 +44,7 @@ return {
 				filetypes = {
 					"lua",
 					"css",
-					html = { mode = "foreground" },
+					-- html = { mode = "foreground" },
 				},
 				user_defaultoions = { mode = "background" },
 			})
@@ -77,6 +77,7 @@ return {
                     python = { "ruff_organize_imports", "ruff_format" },
                     c = { "clang-format" },
                     html = { "superhtml" },
+                    javascript = { "biome" },
                 },
                 formatters = {
                     ["clang-format"] = {
