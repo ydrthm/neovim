@@ -46,6 +46,16 @@ return {
 					"css",
 					-- html = { mode = "foreground" },
 				},
+                options = {
+                    parsers = {
+                        names = {
+                            enable = false,
+                            lowercase = false, -- match lowercase names
+                            camelcase = false, -- match CamelCase names (e.g. "LightBlue")
+                            uppercase = false, -- match UPPERCASE names
+                        },
+                    },
+                },
 				user_defaultoions = { mode = "background" },
 			})
 		end,
