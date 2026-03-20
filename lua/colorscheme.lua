@@ -1,117 +1,69 @@
 return {
-    -- {
-    --     "maxmx03/solarized.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     ---@type solarized.config
-    --     opts = {
-    --         transparent = {
-    --             enabled = true,
-    --             normalfloat = false,
-    --             pmenu = false,
-    --             lazy = false,
-    --             mason = false,
-    --         },
-    --         styles = {
-    --             enabled = false,
-    --         },
-    --     },
-    --     config = function(_, opts)
-    --         vim.o.background = "dark"
-    --         require("solarized").setup(opts)
-    --         vim.cmd.colorscheme("solarized")
-    --     end,
-    -- },
-    -- {
-    --     "rose-pine/neovim",
-    --     name = "rose-pine",
-    --     config = function()
-    --         require("rose-pine").setup({
-    --             styles = {
-    --                 bold = false,
-    --                 italic = false,
-    --                 transparency = false,
-    --             },
-    --             -- highlight_groups = {
-    --             --     -- Base is the dark rose-pine background. 
-    --             --     -- You can also use "overlay" for a slightly lighter solid look.
-    --             --     NormalFloat = { bg = "base" },
-    --             --     FloatBorder = { bg = "base", fg = "muted" },
-    --             --
-    --             --     -- Optional: Make telescope/mason windows follow suit
-    --             --     -- TelescopeNormal = { bg = "base" },
-    --             --     -- TelescopeBorder = { bg = "base" },
-    --             --     -- This handles the Autocomplete Dropdown
-    --             --     Pmenu = { bg = "base" },             -- The main menu background
-    --             --     PmenuSel = { bg = "highlight_high", fg = "text" }, -- The selected item
-    --             --     PmenuSbar = { bg = "overlay" },      -- The scrollbar background
-    --             --     PmenuThumb = { bg = "muted" },       -- The scrollbar handle
-    --             -- },
-    --         })
-    --         vim.cmd("colorscheme rose-pine")
-    --     end
-    --
-    -- },
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        config = function()
+            require("rose-pine").setup({
+                styles = {
+                    bold = false,
+                    italic = false,
+                    transparency = false,
+                },
+                palette = {
+                    _nc = "#16141f",
+                    base = "#191724",
+                    surface = "#1f1d2e",
+                    overlay = "#26233a",
+                    muted = "#6e6a86",
+                    subtle = "#908caa",
+                    text = "#e0def4",
+                    love = "#eb6f92",
+                    gold = "#f6c177",
+                    rose = "#ebbcba",
+                    pine = "#31748f",
+                    foam = "#9ccfd8",
+                    iris = "#c4a7e7",
+                    leaf = "#95b1ac",
+                    highlight_low = "#21202e",
+                    highlight_med = "#403d52",
+                    highlight_high = "#524f67",
+                    none = "NONE",
+                },
+                highlight_groups = {
+                    Function = { fg = "NONE" },
+                    Macro = { fg = "NONE" },
+                    Operator = { fg = "NONE" },
+                    Number = { fg = "NONE" },
+                    Constant = { fg = "NONE" },
+                    Include = { fg = "NONE" },
+                    Boolean = { fg = "NONE" },
+                    Label = { fg = "#31748f" },
 
-    -- {
-    --     "silentium-theme/silentium.nvim",
-    --     lazy = false,          -- Load right away (colorschemes should not be lazy-loaded)
-    --     priority = 1000,       -- Load early, before other UI plugins
-    --     config = function()
-    --         local silentium = require("silentium")
-    --
-    --         silentium.setup({
-    --             -- accent = silentium.accents.yellow,   -- or .yellow, .cyan, .blue, etc.
-    --             accent = "",              -- or any custom hex string
-    --
-    --             -- Full palette override example (rarely needed, but possible)
-    --             white      = "#E6E6E6",
-    --             light_gray = "#A6A6A6",
-    --             gray       = "#737373",
-    --             dark_gray  = "#282828",
-    --             dark       = "#141414",          -- background
-    --             diff_add   = "#273C29",
-    --             diff_change= "#4D4322",
-    --             diff_delete= "#492523",
-    --             diff_text  = "#857131",
-    --         })
-    --
-    --         vim.cmd.colorscheme("silentium")
-    --
-    --         local set_hl = vim.api.nvim_set_hl
-    --
-    --         -- set_hl(0, "Normal",       { bg = "NONE" })          -- primary background
-    --         -- set_hl(0, "NormalNC",     { bg = "NONE" })          -- non-current window (if focus lost)
-    --         -- --
-    --         -- set_hl(0, "FzfLuaNormal", { bg = "#282828" })    -- keep solid for fzf popup (as you wanted earlier)
-    --
-    --         set_hl(0, "StatusLine", {
-    --             fg = "#A6A6A6",          -- light gray (or "#E6E6E6" for brighter white-ish)
-    --             bg = "NONE",             -- keep transparent
-    --             ctermfg = 7, ctermbg = "NONE"  -- optional for 256-color terminals
-    --         })
-    --
-    --         -- Inactive statusline: dimmer gray
-    --         set_hl(0, "StatusLineNC", {
-    --             fg = "#737373",          -- medium gray
-    --             bg = "NONE",
-    --         })
-    --
-    --         vim.api.nvim_set_hl(0, "String", { fg = "#FF7E70",bold = false })
-    --         vim.api.nvim_set_hl(0, "Special", { fg = "#FF7E70",bold = false })
-    --         -- vim.api.nvim_set_hl(0, "Comment", { fg = "#8c3bcc",bold = false })
-    --         -- #07a34a
-    --
-    --         set_hl(0, "@constructor.lua", { fg = "NONE" })
-    --         set_hl(0, "@lsp.typemod.variable.declaration", { fg = "#0981D1" })
-    --         set_hl(0, "@lsp.typemod.function.defaultLibrary", { fg = "#E6E6E6" })
-    --         set_hl(0, "@lsp.typemod.function.declaration", { fg = "#FFCC00" })
-    --         set_hl(0, "@lsp.typemod.parameter.declaration", { fg = "#0981D1" })
-    --         set_hl(0, "@lsp.typemod.macro.declaration", { fg = "#FF7E70" })
-    --         set_hl(0, "@lsp.type.macro", { fg = "#E6E6E6" })
-    --
-    --     end,
-    -- },
+                    ["@function"] = { fg = "NONE" },
+                    ["@function.builtin"] = { fg = "NONE" },
+                    ["@function.method"] = { fg = "NONE" },
+                    ["@function.method.call"] = { fg = "NONE" },
 
+                    ["@parameter"] = { fg = "NONE" },
+                    ["@variable.parameter"] = { fg = "NONE" },
+                    ["@variable.parameter.builtin"] = { fg = "NONE" },
+                    ["@variable.builtin"] = { fg = "NONE" },
+                    ["@variable.member"] = { fg = "NONE" },
+
+                    ["@constant.macro"] = { fg = "NONE" },
+
+                    ["@property"] = { fg = "NONE" },
+                    ["@constructor"] = { fg = "NONE" },
+
+                    ["@punctuation.delimiter"] = { fg = "NONE" },
+                    ["@punctuation.bracket"] = { fg = "NONE" },
+                    ["@punctuation.special"] = { fg = "NONE" },
+
+                    BlinkCmpKindTypeParameter = { fg = "NONE" },
+                },
+            })
+            vim.cmd("colorscheme rose-pine")
+        end
+    },
 }
 

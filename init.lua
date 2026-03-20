@@ -1,5 +1,5 @@
-vim.env.PATH = vim.fn.getcwd() .. "/.venv/bin:" .. vim.env.PATH
 require("core")
+-- require("mycolor.init").load()
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -24,13 +24,11 @@ require("lazy").setup({
     { import = "others" },
     { import = "lsp" },
     { import = "git" },
-    { import = "debugger" },
     { import = "treesitter" },
-    { import = "vimbegood" },
+    { import = "autocomplete" },
   },
   checker = { enabled = true },
 })
-
 -- vim.cmd("hi @keyword.return guifg=green")
 -- vim.api.nvim_set_hl(0, "Statement", { bold = false })
 vim.api.nvim_set_hl(0, "netrwMarkFile", { fg = "#e0def4", bg = "#fc6f03"})
