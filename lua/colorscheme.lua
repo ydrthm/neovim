@@ -59,6 +59,10 @@ return {
                     ["@punctuation.bracket"] = { fg = "NONE" },
                     ["@punctuation.special"] = { fg = "NONE" },
 
+                    ["@lsp.mod.defaultLibrary.javascript"] = { fg = "#e0def4" },
+                    ["@lsp.typemod.class.declaration.javascript"] = { fg = "#e0def4" },
+
+
                     BlinkCmpKindTypeParameter = { fg = "NONE" },
                 },
             })
