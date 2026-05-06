@@ -11,6 +11,7 @@ return {
             "vtsls",
             "eslint",
             "superhtml",
+            "emmet_language_server",
         },
         automatic_enable = true,
     },
