@@ -1,0 +1,78 @@
+{
+  "plugins": {
+    "alabaster.nvim": {
+      "rev": "b902c73fabefc13583bfc0c18b28950ea8f6244f",
+      "src": "https://github.com/dchinmay2/alabaster.nvim.git"
+    },
+    "blink.cmp": {
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp.git",
+      "version": "'v1'"
+    },
+    "fidget.nvim": {
+      "rev": "889e2e96edef4e144965571d46f7a77bcc4d0ddf",
+      "src": "https://github.com/j-hui/fidget.nvim.git"
+    },
+    "friendly-snippets": {
+      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
+      "src": "https://github.com/rafamadriz/friendly-snippets.git"
+    },
+    "fzf-lua": {
+      "rev": "ca139b8fec043057038c69ce2b34cf4b8b83746e",
+      "src": "https://github.com/ibhagwan/fzf-lua.git"
+    },
+    "gitsigns.nvim": {
+      "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
+      "src": "https://github.com/lewis6991/gitsigns.nvim.git"
+    },
+    "harpoon": {
+      "rev": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3",
+      "src": "https://github.com/ThePrimeagen/harpoon.git"
+    },
+    "mason-lspconfig.nvim": {
+      "rev": "7b01e2974a47d489bb92f47a41e4c0088ea8f86e",
+      "src": "https://github.com/mason-org/mason-lspconfig.nvim.git"
+    },
+    "mason-tool-installer.nvim": {
+      "rev": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc",
+      "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim.git"
+    },
+    "mason.nvim": {
+      "rev": "8e921c2b68571e978db5d4d3fef9c9a7f8755473",
+      "src": "https://github.com/mason-org/mason.nvim.git"
+    },
+    "neovim": {
+      "rev": "ff483051a47e27d84bdef47703538df1ed9f4a47",
+      "src": "https://github.com/rose-pine/neovim.git"
+    },
+    "no-clown-fiesta.nvim": {
+      "rev": "04b808e9769ded988089772ffcaf08d92d75d927",
+      "src": "https://github.com/aktersnurra/no-clown-fiesta.nvim.git"
+    },
+    "nvim-colorizer.lua": {
+      "rev": "5cfe7fffbd01e17b3c1e14af85d5febdef88bd8c",
+      "src": "https://github.com/catgoose/nvim-colorizer.lua.git"
+    },
+    "nvim-lspconfig": {
+      "rev": "f9349d4d99e7d66403ae8bf4fbd357b154dca7a7",
+      "src": "https://github.com/neovim/nvim-lspconfig.git"
+    },
+    "nvim-surround": {
+      "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
+      "src": "https://github.com/kylechui/nvim-surround.git",
+      "version": "4.0.0 - 5.0.0"
+    },
+    "nvim-treesitter-context": {
+      "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context.git"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim.git"
+    },
+    "tree-sitter-manager.nvim": {
+      "rev": "9e34b54ac652876953f0e55f879fe5652a6c86dd",
+      "src": "https://github.com/romus204/tree-sitter-manager.nvim.git"
+    }
+  }
+}
