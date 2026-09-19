@@ -1,26 +1,51 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
         lazy = false,
-        opts = {
-            auto_install = true,
-            sync_install = false,
-            highlight = { enable = true, },
-            indent = { enable = false, },
-            ensure_installed = {
-                "html",
-                "css",
-                "c",
+        build = ":TSUpdate",
+
+        config = function()
+            require("nvim-treesitter").setup()
+
+            require("nvim-treesitter").install({
                 "lua",
                 "vim",
                 "vimdoc",
-                "markdown",
-                "csv",
                 "javascript",
-            },
-        },
+                "typescript",
+                "html",
+                "css",
+                "json",
+                "bash",
+                "c",
+            })
+
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = {
+                    "lua",
+                    "vim",
+                    "vimdoc",
+                    "javascript",
+                    "typescript",
+                    "html",
+                    "css",
+                    "json",
+                    "bash",
+                    "c",
+                },
+                callback = function() vim.treesitter.start() end,
+            })
+        end,
     },
+    -- {
+    --     "romus204/tree-sitter-manager.nvim",
+    --     dependencies = {}, -- tree-sitter CLI must be installed system-wide
+    --     config = function()
+    --         require("tree-sitter-manager").setup({
+    --             auto_install = false,
+    --         })
+    --     end,
+    -- },
     {
         "nvim-treesitter/nvim-treesitter-context",
         after = "nvim-treesitter",

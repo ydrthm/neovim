@@ -4,8 +4,8 @@
 return {
     on_attach = function(client)
         -- Disable formatting (let null-ls / conform / eslint handle it)
-        client.server_capabilities.documentFormattingProvider = true
-        client.server_capabilities.documentRangeFormattingProvider = true
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
     end,
 
     settings = {

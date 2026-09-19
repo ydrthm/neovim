@@ -1,6 +1,7 @@
 return {
-    "mason-org/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     dependencies = {
+        "mason-org/mason-lspconfig.nvim",
         "mason-org/mason.nvim",
         "neovim/nvim-lspconfig",
     },
@@ -8,12 +9,14 @@ return {
         ensure_installed = {
             "lua_ls",
             "clangd",
+            "clang-format",
             "vtsls",
-            "eslint",
+            "biome",
             "superhtml",
             "emmet_language_server",
         },
-        automatic_enable = true,
+        auto_update = false,
+        run_on_start = true,
     },
     config = function(_, opts)
         require("mason").setup({
@@ -25,7 +28,8 @@ return {
                 },
             },
         })
-        require("mason-lspconfig").setup(opts)
+        require("mason-tool-installer").setup(opts)
+        require("mason-lspconfig").setup()
 
         vim.diagnostic.config({
             virtual_text = true,
@@ -34,6 +38,5 @@ return {
 
         vim.keymap.set("n", "<leader>ql", vim.diagnostic.setloclist, { desc = "Open diagnostic [L]ocal list" })
         vim.keymap.set("n", "<leader>qf", vim.diagnostic.setqflist, { desc = "Open diagnostic [Q]uickfix list" })
-        vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, { desc = "Open diagnostic float" })
     end
 }
