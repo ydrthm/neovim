@@ -2,13 +2,14 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local rep = require("luasnip.extras").rep
 
 ls.add_snippets("javascript", {
     s({
         trig = "fu",
         regTrig = true
     }, {
-        t("function "), i(1, "foo"), t("("), i(2, "x"), t(") {"),
+        t("function "), i(1, "foo"), t("("), i(2, "a"), t(") {"),
         t({ "", "\t" }), i(0), -- Moves your cursor inside the indented body
         t({ "", "}" })         -- Closes the bracket on a new line
     })

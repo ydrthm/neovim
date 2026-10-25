@@ -4,7 +4,6 @@ vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes:1"
 vim.opt.ignorecase = true
 vim.opt.swapfile = false
-vim.opt.autoindent = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -12,25 +11,22 @@ vim.opt.shiftwidth = 4
 vim.opt.shiftround = true
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.numberwidth = 3
 vim.opt.wrap = false
 vim.opt.scrolloff = 8
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.clipboard = "unnamedplus"
-
--- vim.opt.completeopt = "fuzzy,menuone,popup"
--- vim.opt.complete = "o,.,w,b"
--- vim.opt.pumheight = 10
--- vim.opt.pummaxwidth = 80
--- vim.opt.autocomplete = false
-
-vim.opt.showmatch = true
+vim.opt.winborder = "single"
 vim.opt.foldmethod = "manual"
+
+vim.opt.completeopt = "fuzzy,menuone,popup"
+vim.opt.complete = "o,.,w,b"
+vim.opt.pumheight = 10
+vim.opt.pummaxwidth = 80
+vim.opt.autocomplete = false
+
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<space>", "<Nop>")
@@ -42,10 +38,30 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Navigate search word (centered)" })
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
-vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", { desc = "Move lines up" })
+vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", { desc = "Move lines down" })
 vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", { desc = "Move lines up" })
 
-vim.api.nvim_set_hl(0, "MyCursor", { fg = "#000000", bg = "#d4d4d4", })
+-- Helper function for wrapping around quickfix list
+local function quickfix_nav(cmd)
+    return function()
+        local status, _ = pcall(function() vim.cmd(cmd) end)
+        if not status then
+            if cmd == "cnext" then
+                vim.cmd("cfirst")
+            elseif cmd == "cprev" then
+                vim.cmd("clast")
+            end
+        end
+        vim.cmd("normal! zz")
+    end
+end
+
+vim.keymap.set("n", "<M-j>", quickfix_nav("cnext"), { desc = "Next Quickfix Item" })
+vim.keymap.set("n", "<M-k>", quickfix_nav("cprev"), { desc = "Previous Quickfix Item" })
+
+vim.keymap.set("n", "<leader>gq", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format current buffer" })
+
+vim.api.nvim_set_hl(0, "MyCursor", { fg = "#3f3f3f", bg = "#dcdccc" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
@@ -72,22 +88,46 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
-
         if client then
             client.server_capabilities.semanticTokensProvider = nil
         end
     end,
 })
 
+-- vim.api.nvim_create_user_command("PrettierFormat", function()
+--     local file = vim.api.nvim_buf_get_name(0)
+--
+--     if file == "" then
+--         vim.notify("Save the file before formatting", vim.log.levels.WARN)
+--         return
+--     end
+--
+--     vim.fn.jobstart({ "prettier", "--write", file }, {
+--         on_exit = function(_, code)
+--             if code == 0 then
+--                 vim.schedule(function()
+--                     vim.cmd("checktime")
+--                     vim.notify("Formatted with Prettier")
+--                 end)
+--             else
+--                 vim.schedule(function()
+--                     vim.notify("Prettier formatting failed", vim.log.levels.ERROR)
+--                 end)
+--             end
+--         end,
+--     })
+-- end, { desc = "Format current file with Prettier" })
+--
+-- vim.keymap.set("n", "<leader>fl", "<cmd>PrettierFormat<cr>", {
+--     desc = "Format with Prettier",
+-- })
+
 require("plugins.telescope")
 require("plugins.miniharp")
-require("plugins.gitsigns")
 require("plugins.lsp")
-require("plugins.lint")
 require("plugins.treesitter")
-require("plugins.conform")
 require("plugins.colorscheme")
-require("plugins.blink")
+require("plugins.luasnip")
 
 vim.pack.add({
     {
@@ -97,11 +137,14 @@ vim.pack.add({
     "https://github.com/j-hui/fidget.nvim",
     "https://github.com/jiaoshijie/undotree",
     "https://github.com/catgoose/nvim-colorizer.lua",
+    "https://github.com/lewis6991/gitsigns.nvim",
 })
 
 require("nvim-surround").setup()
 require("fidget").setup()
 require("undotree").setup()
+vim.keymap.set("n", "<leader>u", require("undotree").toggle, { silent = true })
+
 require("colorizer").setup({
     filetypes = {
         "lua",
@@ -120,5 +163,12 @@ require("colorizer").setup({
     },
     user_defaultoions = { mode = "background" },
 })
-
-vim.keymap.set("n", "<leader>u", require("undotree").toggle, { silent = true })
+require("gitsigns").setup({
+    signs = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+    },
+})

@@ -18,5 +18,3 @@ vim.keymap.set('n', '<C-h>', function() miniharp.go_to(1) end, { desc = 'minihar
 vim.keymap.set('n', '<C-j>', function() miniharp.go_to(2) end, { desc = 'miniharp: go to mark 2' })
 vim.keymap.set('n', '<C-s>', function() miniharp.go_to(3) end, { desc = 'miniharp: go to mark 3' })
 vim.keymap.set('n', '<C-e>', function() miniharp.go_to(4) end, { desc = 'miniharp: go to mark 4' })
-
-
